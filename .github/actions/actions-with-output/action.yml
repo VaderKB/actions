@@ -26,5 +26,4 @@ runs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "It came here hahahahahaha"
         echo "cache=done" >> $GITHUB_OUTPUT
