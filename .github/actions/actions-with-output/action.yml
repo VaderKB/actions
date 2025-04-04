@@ -1,0 +1,29 @@
+name: 'Get outputs'
+description: 'Actions with output'
+inputs:
+  if-cache: 
+    description: 'Decide whether to cache or no'
+    required: false #Set to true if always needed
+    default: 'true'
+outputs:
+  if-cache-uses:
+    description: 'Outputs if cache has been used'
+    value: ${{ steps.install.outputs.cache }}
+runs:
+  using: composite
+  steps:
+    - name: cache dependencies
+      if: inputs.if-cache == 'true'
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-with-input-${{ hashFiles('**/requirements.txt') }}
+    - name: install packages
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.if-cache != 'true'
+      id: install
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        echo "cache=done" >> $GITHUB_OUTPUT

@@ -11,6 +11,10 @@ jobs:
         - name: checkout code
           uses: actions/checkout@v4
         - name: load and cache dependencies
-          uses: ./.github/actions/actions-with-input # Path from root folder of the project
+          id: cache-step
+          uses: ./.github/actions/actions-with-output # Path from root folder of the project
           with:
             if-cache: 'false'
+        - name: Output action
+          run: "cache used ${{ steps.cache-step.outputs.cache }}"
+
