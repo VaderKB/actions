@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: checkout code
-          uses: actions/checktout@v4
+          uses: actions/checkout@v4
         - name: load and cache dependencies
           uses: ./.github/actions/cached-deps # Path from root folder of the project
