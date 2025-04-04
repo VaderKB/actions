@@ -16,5 +16,5 @@ jobs:
           with:
             if-cache: 'false'
         - name: Output action
-          run: "cache used ${{ steps.cache-step.outputs.cache }}"
+          run: echo "cache used ${{ steps.cache-step.outputs.cache }}"
 
