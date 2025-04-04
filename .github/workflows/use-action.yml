@@ -1,0 +1,14 @@
+name: use actions
+on:
+    push:
+        branches:
+          - main 
+run-name: using composite actions 
+jobs:
+  use-composite-actions:
+    runs-on: ubuntu-latest
+    steps:
+        - name: checkout code
+          uses: actions/checktout@v4
+        - name: load and cache dependencies
+          uses: ./.github/actions/cached-deps # Path from root folder of the project
